@@ -64,6 +64,11 @@
                     </span>
                     @enderror
                 </div>
+                <div>
+                    <input type="hidden"
+                           name="access"
+                           value="usuario">
+                </div>
 
                 <div class="input-group mb-3">
                     <input type="password"

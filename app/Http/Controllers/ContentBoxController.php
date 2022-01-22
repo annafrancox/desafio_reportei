@@ -15,7 +15,8 @@ class ContentBoxController extends Controller
      */
     public function index()
     {
-        //
+        $contentbox = ContentBox::all();
+        return view('admin.contentbox.index', compact('contentbox'));
     }
 
     /**
@@ -25,7 +26,8 @@ class ContentBoxController extends Controller
      */
     public function create()
     {
-        //
+        $contentbox = new ContentBox();
+        return view('admin.contentbox.create', compact('contentbox'));
     }
 
     /**
@@ -36,7 +38,8 @@ class ContentBoxController extends Controller
      */
     public function store(StoreContentBoxRequest $request)
     {
-        //
+        ContentBox::create($request->all());
+        return redirect()->route('contentbox.index')->with('success', true);
     }
 
     /**
@@ -47,7 +50,7 @@ class ContentBoxController extends Controller
      */
     public function show(ContentBox $contentBox)
     {
-        //
+        return view('admin.contentbox.show', compact('contentBox'));
     }
 
     /**
@@ -58,7 +61,7 @@ class ContentBoxController extends Controller
      */
     public function edit(ContentBox $contentBox)
     {
-        //
+        return view('admin.contentbox.edit', compact('contentBox'));
     }
 
     /**
@@ -70,7 +73,8 @@ class ContentBoxController extends Controller
      */
     public function update(UpdateContentBoxRequest $request, ContentBox $contentBox)
     {
-        //
+        $contentBox->update($request->all());
+        return redirect()->route('contentbox.index')->with('success', true);
     }
 
     /**
@@ -81,6 +85,7 @@ class ContentBoxController extends Controller
      */
     public function destroy(ContentBox $contentBox)
     {
-        //
+        $contentBox->delete();
+        return redirect()->route('contentbox.index')->with('success', true);
     }
 }

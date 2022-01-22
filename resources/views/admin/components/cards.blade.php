@@ -17,19 +17,9 @@
             </div>
         @endif
 
-        <div class="card-body table-responsive ">
-            <table  class="table table-hover dataTable table-striped">
-                <thead>
-                <tr>
-                    {{ $head ?? null }}
-                </tr>
-                </thead>
-                <tbody>
-                {{ $body ?? null }}
-                </tbody>
-            </table>
-            <div style="margin-top: 40px;"></div>
-            {{ $footer ?? null }}
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+        {{ $body ?? null }}
+        {{ $footer ?? null }}
         </div>
     </div>
 @else
