@@ -9,13 +9,7 @@
     <div class="sidebar">
         <!-- Sidebar user panel (optional) -->
         <div class="pb-1 mt-3 mb-3 user-panel d-flex">
-            <div class="profile">
-                <img src="{{ asset('img/profile.jpg') }}" class="profilepic img-circle elevation-2" alt="User Image">
-            </div>
-             <!-- <div class="info">
-                <a href="#" class="d-block"> </a>
-            </div> -->
-            <div class="profilelogout info align-self-center">
+            <div class="profilelogout info align-self-right">
                 <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     <i class="nav-icon fas fa-power-off"></i>
                 </a>

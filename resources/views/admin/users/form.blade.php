@@ -11,8 +11,8 @@
     <div class="form-group col-sm-12 col-md-6">
         <label for="access" class="required">Acesso:</label>
             <select class="select2-usage form-control controlselect" name="access" required value="{{ old('access',$user->access) }}">
-                <option value="administrador">Administrador</option>
                 <option value="usuario">Usuário</option>
+                <option value="administrador">Administrador</option>
             </select>
     </div>
     <div class="form-group col-sm-12 col-md-6">
@@ -24,12 +24,4 @@
             <input type="password" name="password_confirmation" id="password_confirmation" required class="form-control">
     </div>
 </div>
-@push('scripts')
-    <script>
-        //funcao para input de selecionar cargo
-        $(document).ready(function() {
-            $('.select2-usage').select2();
-        });
-    </script>
-@endpush
 

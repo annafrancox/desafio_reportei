@@ -13,7 +13,7 @@ class ContentBoxController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function index()
     {
@@ -24,7 +24,7 @@ class ContentBoxController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function create()
     {
@@ -36,28 +36,34 @@ class ContentBoxController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\StoreContentBoxRequest  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(StoreContentBoxRequest $request)
     {
         $data=$request->all();
         $contentbox = ContentBox::create($data);
+//        dd($contentbox);
         for ($i =0; $i < count($data['attachment']); $i++)
         {
-
             $attachment_data = $data['attachment'][$i]->store($contentbox->id, 'public');
             $file_data['contentbox_id'] = $contentbox->id;
             $file_data['file_name'] = pathinfo($attachment_data)['basename'];
+            $extension = pathinfo( $file_data['file_name'], PATHINFO_EXTENSION);
             $attachment = Attachment::create($file_data);
         }
         return redirect()->route('contentbox.index')->with('success', true);
     }
 
+    function downloadFile($file_name){
+        $file = Storage::disk('public')->get($file_name);
+
+        return (new Response($file, 200));
+    }
     /**
      * Display the specified resource.
      *
      * @param  \App\Models\ContentBox  $contentBox
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function show(ContentBox $contentbox)
     {
@@ -68,7 +74,7 @@ class ContentBoxController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\ContentBox  $contentBox
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function edit(ContentBox $contentbox)
     {
@@ -80,11 +86,13 @@ class ContentBoxController extends Controller
      *
      * @param  \App\Http\Requests\UpdateContentBoxRequest  $request
      * @param  \App\Models\ContentBox  $contentBox
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(UpdateContentBoxRequest $request, ContentBox $contentbox)
     {
-        $contentbox->update($request->all());
+        $data=$request->all();
+        $contentbox->update($data);
+
         return redirect()->route('contentbox.index')->with('success', true);
     }
 
@@ -92,7 +100,7 @@ class ContentBoxController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\ContentBox  $contentBox
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(ContentBox $contentbox)
     {
