@@ -13,6 +13,6 @@ class Attachment extends Model
     ];
 
     public function contentbox() {
-        return $this->belongsTo('App\ContentBox', 'contentbox_id' );
+        return $this->belongsTo('App\Models\ContentBox', 'contentbox_id' );
     }
 }

@@ -24,20 +24,10 @@
 .brand-image {
     padding-left: 20px;
 }
-/* foto de perfil na sidebar */
-.profilepic {
-    width: 50px !important;
-    height: 50px !important;
-}
-/* area da foto de perfil na sidebar */
-.profile {
-    padding-left: 5px;
-    padding-right: 130px;
-}
+
 /* icone logout na sidebar */
 .profilelogout{
-    padding-top: 30px !important;
-    padding-bottom: 0;
+    padding-left: 80% !important;
 }
 /* mudando os links ativos para a id visual */
 .active {
@@ -53,4 +43,29 @@
 .btn-list form {
     width: 40px;
     display:inline-block !important;
+}
+.card-attachment {
+    height: 300px;
+    width: 300px;
+}
+.card-attachment img {
+    align-self: center;
+    margin-top: 20px;
+}
+.iconcard {
+    align-self: center;
+    padding-top: 60px;
+    padding-bottom: 40px;
+}
+.alignrow {
+    max-width: 400px;
+    padding-left: 50px;
+}
+.btndownload {
+    padding-left: 210px;
+}
+.titlebox {
+    float: none !important;
+    text-align: center;
+    font-size: 30px;
 }

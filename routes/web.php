@@ -30,7 +30,7 @@ Route::middleware('auth')->group(function ()
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
     //Rotas para a User
-    Route::get('/users', [App\Http\Controllers\UserController::class, 'index'])->name('user.index');
+    Route::get('/users', [App\Http\Controllers\UserController::class, 'index'])->name('user.index')->middleware('isAdmin');
     Route::get('/users/create', [App\Http\Controllers\UserController::class, 'create'])->name('user.create')->middleware('isAdmin');
     Route::get('/users/{user}/edit', [App\Http\Controllers\UserController::class, 'edit'])->name('user.edit')->middleware('isAdmin');
     Route::put('/users/{user}/update', [App\Http\Controllers\UserController::class, 'update'])->name('user.update')->middleware('isAdmin');
@@ -46,5 +46,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
     Route::put('/contentbox/{contentbox}/update', [App\Http\Controllers\ContentBoxController::class, 'update'])->name('contentbox.update')->middleware('isAdmin');
     Route::delete('/contentbox/{contentbox}', [App\Http\Controllers\ContentBoxController::class, 'destroy'])->name('contentbox.destroy')->middleware('isAdmin');
 
-    Route::get('/download/{attachment}', [App\Http\Controllers\ContentBoxController::class, 'downloadFile'])->name('download');
+    //Rotas para a Attachment
+    Route::get('/download/{attachment}', [App\Http\Controllers\ContentBoxController::class, 'downloadAttachment'])->name('download');
+    Route::delete('/contentbox/attachment/{attachment}', [App\Http\Controllers\ContentBoxController::class, 'destroyAttachment'])->name('attachment.destroy');
 });

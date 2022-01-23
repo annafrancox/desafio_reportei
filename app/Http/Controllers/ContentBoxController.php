@@ -54,10 +54,20 @@ class ContentBoxController extends Controller
         return redirect()->route('contentbox.index')->with('success', true);
     }
 
-    function downloadFile($file_name){
-        $file = Storage::disk('public')->get($file_name);
+    function downloadAttachment(Attachment $attachment){
+        $file = 'public/'.$attachment->contentbox->id.'/'.$attachment->file_name;
 
-        return (new Response($file, 200));
+        return Storage::download($file);
+    }
+
+    public function destroyAttachment(Attachment $attachment)
+    {
+        $directory = $attachment->contentbox->id;
+        $file ='public/'.$directory.'/'.$attachment->file_name;
+        Storage::delete($file);
+        $attachment->delete();
+
+        return redirect()->back();
     }
     /**
      * Display the specified resource.
@@ -93,8 +103,18 @@ class ContentBoxController extends Controller
         $data=$request->all();
         $contentbox->update($data);
 
+        for ($i =0; $i < count($data['attachment']); $i++)
+        {
+            $attachment_data = $data['attachment'][$i]->store($contentbox->id, 'public');
+            $file_data['contentbox_id'] = $contentbox->id;
+            $file_data['file_name'] = pathinfo($attachment_data)['basename'];
+            $extension = pathinfo( $file_data['file_name'], PATHINFO_EXTENSION);
+            $attachment = Attachment::create($file_data);
+        }
+
         return redirect()->route('contentbox.index')->with('success', true);
     }
+
 
     /**
      * Remove the specified resource from storage.

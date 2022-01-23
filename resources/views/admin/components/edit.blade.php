@@ -9,6 +9,7 @@
                 @method('put')
                 {{ $form ?? null }}
             </form>
+            {{ $files ?? null }}
         </div>
         <div class="card-footer">
             <button type="submit" form="form-adicionar" class="btn btn-primary float-right">Atualizar</button>
