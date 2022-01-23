@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateContentBoxesTable extends Migration
+class CreateAttachmentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,13 @@ class CreateContentBoxesTable extends Migration
      */
     public function up()
     {
-        Schema::create('content_boxes', function (Blueprint $table) {
+        Schema::create('attachments', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->unsignedBigInteger('contentbox_id');
+            $table->string('file_name');
             $table->timestamps();
+
+            $table->foreign('contentbox_id')->references('id')->on('content_boxes')->onDelete('cascade');
         });
     }
 
@@ -27,6 +30,6 @@ class CreateContentBoxesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('content_boxes');
+        Schema::dropIfExists('attachments');
     }
 }

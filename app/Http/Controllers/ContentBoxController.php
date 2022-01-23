@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Attachment;
 use App\Models\ContentBox;
 use App\Http\Requests\StoreContentBoxRequest;
 use App\Http\Requests\UpdateContentBoxRequest;
+use Illuminate\Support\Facades\Storage;
 
 class ContentBoxController extends Controller
 {
@@ -38,7 +40,16 @@ class ContentBoxController extends Controller
      */
     public function store(StoreContentBoxRequest $request)
     {
-        ContentBox::create($request->all());
+        $data=$request->all();
+        $contentbox = ContentBox::create($data);
+        for ($i =0; $i < count($data['attachment']); $i++)
+        {
+
+            $attachment_data = $data['attachment'][$i]->store($contentbox->id, 'public');
+            $file_data['contentbox_id'] = $contentbox->id;
+            $file_data['file_name'] = pathinfo($attachment_data)['basename'];
+            $attachment = Attachment::create($file_data);
+        }
         return redirect()->route('contentbox.index')->with('success', true);
     }
 
@@ -48,9 +59,9 @@ class ContentBoxController extends Controller
      * @param  \App\Models\ContentBox  $contentBox
      * @return \Illuminate\Http\Response
      */
-    public function show(ContentBox $contentBox)
+    public function show(ContentBox $contentbox)
     {
-        return view('admin.contentbox.show', compact('contentBox'));
+        return view('admin.contentbox.show', compact('contentbox'));
     }
 
     /**
@@ -59,9 +70,9 @@ class ContentBoxController extends Controller
      * @param  \App\Models\ContentBox  $contentBox
      * @return \Illuminate\Http\Response
      */
-    public function edit(ContentBox $contentBox)
+    public function edit(ContentBox $contentbox)
     {
-        return view('admin.contentbox.edit', compact('contentBox'));
+        return view('admin.contentbox.edit', compact('contentbox'));
     }
 
     /**
@@ -71,9 +82,9 @@ class ContentBoxController extends Controller
      * @param  \App\Models\ContentBox  $contentBox
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateContentBoxRequest $request, ContentBox $contentBox)
+    public function update(UpdateContentBoxRequest $request, ContentBox $contentbox)
     {
-        $contentBox->update($request->all());
+        $contentbox->update($request->all());
         return redirect()->route('contentbox.index')->with('success', true);
     }
 
@@ -83,9 +94,11 @@ class ContentBoxController extends Controller
      * @param  \App\Models\ContentBox  $contentBox
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ContentBox $contentBox)
+    public function destroy(ContentBox $contentbox)
     {
-        $contentBox->delete();
+        $directory = $contentbox->id;
+        Storage::deleteDirectory('public/'.$directory);
+        $contentbox->delete();
         return redirect()->route('contentbox.index')->with('success', true);
     }
 }

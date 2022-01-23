@@ -37,7 +37,10 @@ Route::delete('/users/{user}', [App\Http\Controllers\UserController::class, 'des
 //Rotas para a ContentBox
 Route::get('/contentbox', [App\Http\Controllers\ContentBoxController::class, 'index'])->name('contentbox.index');
 Route::get('/contentbox/create', [App\Http\Controllers\ContentBoxController::class, 'create'])->name('contentbox.create');
+Route::post('/contentbox/upload', [App\Http\Controllers\AttachmentController::class, 'store'])->name('contentbox.upload');
 Route::post('/contentbox/store', [App\Http\Controllers\ContentBoxController::class, 'store'])->name('contentbox.store');
-Route::get('/contentbox/{contentBox}/edit', [App\Http\Controllers\ContentBoxController::class, 'edit'])->name('contentbox.edit');
-Route::put('/contentbox/{contentBox}/update', [App\Http\Controllers\ContentBoxController::class, 'update'])->name('contentbox.update');
-Route::delete('/contentbox/{contentBox}', [App\Http\Controllers\ContentBoxController::class, 'destroy'])->name('contentbox.destroy');
+Route::get('/contentbox/{contentbox}/show', [App\Http\Controllers\ContentBoxController::class, 'show'])->name('contentbox.show');
+Route::get('/contentbox/{contentbox}/edit', [App\Http\Controllers\ContentBoxController::class, 'edit'])->name('contentbox.edit');
+Route::put('/contentbox/{contentbox}/update', [App\Http\Controllers\ContentBoxController::class, 'update'])->name('contentbox.update');
+Route::delete('/contentbox/{contentbox}', [App\Http\Controllers\ContentBoxController::class, 'destroy'])->name('contentbox.destroy');
+

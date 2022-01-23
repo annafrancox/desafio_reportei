@@ -31,7 +31,7 @@
                 <!-- Add icons to the links using the .nav-icon class
                      with font-awesome or any other icon font library -->
                 <li class="nav-item has-treeview ">
-                    <a href="/" class="nav-link {{ Route::is('contentbox.index') ? 'active' : '' }}">
+                    <a href="/contentbox" class="nav-link {{ Route::is('contentbox.index') ? 'active' : '' }}">
                         <i class="pl-1 pr-2 fas fa-boxes"></i>
                         <p>
                             Boxes Zone
