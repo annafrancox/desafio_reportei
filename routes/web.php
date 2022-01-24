@@ -18,16 +18,15 @@ Route::get('/', function () {
 });
 Auth::routes();
 
-Route::get('/', function () {
-    return view('admin.layouts.app');
-})->name('dashboard');
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Auth::routes();
 Route::middleware('auth')->group(function ()
 {
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/', function () {
+        return view('admin.layouts.app');
+    })->name('dashboard');
+
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
     //Rotas para a User
     Route::get('/users', [App\Http\Controllers\UserController::class, 'index'])->name('user.index')->middleware('isAdmin');
@@ -49,4 +48,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
     //Rotas para a Attachment
     Route::get('/download/{attachment}', [App\Http\Controllers\ContentBoxController::class, 'downloadAttachment'])->name('download');
     Route::delete('/contentbox/attachment/{attachment}', [App\Http\Controllers\ContentBoxController::class, 'destroyAttachment'])->name('attachment.destroy');
+});
+
+Route::get('storagelink', function (){
+    \Illuminate\Support\Facades\Artisan::call('storage:link');
 });
