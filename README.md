@@ -4,7 +4,6 @@
 
 <!--ts-->
 * [Desenvolvedor](#desenvolvedor)
-* [Tecnologias](#tecnologias)
 * [Instalação](#instalação)
 * [Hospedagem](#hospedagem)
 <!--te-->
@@ -12,10 +11,6 @@
 ### Desenvolvedor:
 - Anna Letícia Franco Monteiro
 
-### Tecnologias
-
-As seguintes ferramentas foram usadas na construção do projeto:
-- 
 
 ### Instalação:
 
@@ -23,8 +18,9 @@ As seguintes ferramentas foram usadas na construção do projeto:
 
 Para clonar abra o terminal na pasta desejada e digite o comando:
 ```
-git clone
+git clone https://github.com/annafrancox/desafio_reportei.git
 ```
 ### Hospedagem:
 
-- Disponível em:
+- Disponível em: http://techchallenge-reportei.herokuapp.com/
+
