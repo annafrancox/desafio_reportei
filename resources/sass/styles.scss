@@ -1,0 +1,71 @@
+/*TELA LOGIN/REGISTRO*/
+.login-card-body a, .register-card-body a{
+    color: #2F64E0;
+}
+.btn-color {
+    background-color: #2F64E0;
+    color: white;
+}
+/* logo do login/registro */
+.companylogo {
+    width: 300px !important;
+    padding-bottom: 20px;
+}
+/*TELA ADMINLTE*/
+/* icone da barra */
+.barsicon {
+    color: #343a40 !important;
+}
+/* area da logo na sidebar */
+.brand-link{
+    display: inline-block;
+}
+/* logo na sidebar */
+.brand-image {
+    padding-left: 20px;
+}
+
+/* icone logout na sidebar */
+.profilelogout{
+    padding-left: 80% !important;
+}
+/* mudando os links ativos para a id visual */
+.active {
+    background-color:#2F64E0 !important;
+}
+.main-footer a {
+    color: #2F64E0;
+}
+/* botão das listagem */
+.btn-list {
+    display:inline-block !important;
+}
+.btn-list form {
+    width: 40px;
+    display:inline-block !important;
+}
+.card-attachment {
+    height: 300px;
+    width: 300px;
+}
+.card-attachment img {
+    align-self: center;
+    margin-top: 20px;
+}
+.iconcard {
+    align-self: center;
+    padding-top: 60px;
+    padding-bottom: 40px;
+}
+.alignrow {
+    max-width: 400px;
+    padding-left: 50px;
+}
+.btndownload {
+    padding-left: 210px;
+}
+.titlebox {
+    float: none !important;
+    text-align: center;
+    font-size: 30px;
+}
